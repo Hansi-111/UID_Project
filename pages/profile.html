@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile | Student Essentials</title>
+    <link rel="stylesheet" href="../css/profile.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+  </head>
+  <body>
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">
+        <h3>Buyer Panel</h3>
+        <ul>
+          <li><a href="dashboard.html">📊 Dashboard</a></li>
+          <li><a href="profile.html">👤 Profile</a></li>
+          <li><a href="cart.html">🛒 Cart</a></li>
+          <li><a href="billing.html">💳 Billing</a></li>
+          <li><a href="#" id="logoutBtnSidebar">🚪 Logout</a></li>
+        </ul>
+      </aside>
+
+      <main class="dashboard-main">
+        <div class="form-card" style="max-width: 600px">
+          <h2>Edit Profile</h2>
+          <form id="profileForm">
+            <label>Full Name</label>
+            <input type="text" id="profileName" required />
+            <label>Email</label>
+            <input type="email" id="profileEmail" disabled />
+            <button type="submit" class="btn-primary">Update Profile</button>
+          </form>
+          <hr />
+          <button id="resetPasswordRedirect" class="btn-secondary">
+            Reset Password
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script>
+      const current = getCurrentUser();
+      if (!current) window.location.href = "login.html";
+      document.getElementById("profileName").value = current.name;
+      document.getElementById("profileEmail").value = current.email;
+
+      document.getElementById("profileForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const newName = document.getElementById("profileName").value;
+        updateUserName(current.email, newName);
+        alert("Profile updated");
+        window.location.reload();
+      });
+
+      document
+        .getElementById("resetPasswordRedirect")
+        .addEventListener("click", () => {
+          window.location.href = "reset-password.html";
+        });
+      attachLogout();
+    </script>
+  </body>
+</html>

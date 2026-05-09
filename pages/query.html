@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raise a Query | Student Essentials</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/query.css" />
+  </head>
+  <body>
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">
+        <ul>
+          <li><a href="dashboard.html">📊 Dashboard</a></li>
+          <li><a href="query.html">❓ Query</a></li>
+          <li><a href="#" id="logoutQuery">🚪 Logout</a></li>
+        </ul>
+      </aside>
+      <main class="dashboard-main">
+        <div class="form-card">
+          <h2>Raise a Support Query</h2>
+          <form id="queryForm">
+            <label>Subject</label>
+            <input type="text" id="querySubject" required />
+            <label>Message</label>
+            <textarea rows="4" id="queryMsg" required></textarea>
+            <button type="submit" class="btn-primary">Submit Query</button>
+          </form>
+          <div id="queryHistory"></div>
+        </div>
+      </main>
+    </div>
+    <script src="../js/common.js"></script>
+    <script>
+      function loadQueries() {
+        const queries = JSON.parse(localStorage.getItem("userQueries") || "[]");
+        const container = document.getElementById("queryHistory");
+        container.innerHTML = queries
+          .map(
+            (q) =>
+              `<div><strong>${q.subject}</strong><p>${q.message}</p><small>${q.date}</small></div>`,
+          )
+          .join("");
+      }
+      document.getElementById("queryForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const subject = document.getElementById("querySubject").value;
+        const message = document.getElementById("queryMsg").value;
+        const queries = JSON.parse(localStorage.getItem("userQueries") || "[]");
+        queries.push({ subject, message, date: new Date().toLocaleString() });
+        localStorage.setItem("userQueries", JSON.stringify(queries));
+        alert("Query submitted");
+        document.getElementById("queryForm").reset();
+        loadQueries();
+      });
+      loadQueries();
+      attachLogout();
+    </script>
+  </body>
+</html>

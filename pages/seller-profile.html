@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Profile | Student Essentials</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/seller.css" />
+  </head>
+  <body>
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">
+        <h3>Seller Panel</h3>
+        <ul>
+          <li><a href="seller-profile.html">🏪 Profile</a></li>
+          <li><a href="seller-add-item.html">➕ Add Item</a></li>
+          <li><a href="stock-management.html">📦 Manage Stock</a></li>
+          <li><a href="profit.html">📈 Profit Overview</a></li>
+          <li><a href="#" id="logoutSeller">🚪 Logout</a></li>
+        </ul>
+      </aside>
+      <main class="dashboard-main">
+        <div class="form-card">
+          <h2>Seller Profile</h2>
+          <form id="sellerProfileForm">
+            <label>Store Name</label>
+            <input type="text" id="storeName" required />
+            <label>Contact Email</label>
+            <input type="email" id="sellerEmail" disabled />
+            <label>Description</label>
+            <textarea id="storeDesc" rows="3"></textarea>
+            <button type="submit" class="btn-primary">Update Store</button>
+          </form>
+        </div>
+      </main>
+    </div>
+    <script src="../js/common.js"></script>
+    <script>
+      const seller = getCurrentUser();
+      if (!seller || seller.role !== "seller")
+        window.location.href = "login.html";
+      document.getElementById("sellerEmail").value = seller.email;
+      const sellerData = JSON.parse(
+        localStorage.getItem("sellerProfile") || "{}",
+      );
+      document.getElementById("storeName").value = sellerData.storeName || "";
+      document.getElementById("storeDesc").value = sellerData.storeDesc || "";
+
+      document
+        .getElementById("sellerProfileForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const storeName = document.getElementById("storeName").value;
+          const storeDesc = document.getElementById("storeDesc").value;
+          localStorage.setItem(
+            "sellerProfile",
+            JSON.stringify({ storeName, storeDesc, email: seller.email }),
+          );
+          alert("Profile updated");
+        });
+      document.getElementById("logoutSeller").addEventListener("click", () => {
+        logout();
+        window.location.href = "../index.html";
+      });
+    </script>
+  </body>
+</html>

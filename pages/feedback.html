@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback | Student Essentials</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/feedback.css" />
+  </head>
+  <body>
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">
+        <ul>
+          <li><a href="dashboard.html">📊 Dashboard</a></li>
+          <li><a href="profile.html">👤 Profile</a></li>
+          <li><a href="cart.html">🛒 Cart</a></li>
+          <li><a href="billing.html">💳 Billing</a></li>
+          <li><a href="feedback.html">⭐ Feedback</a></li>
+          <li><a href="query.html">❓ Query</a></li>
+          <li><a href="#" id="logoutFeedback">🚪 Logout</a></li>
+        </ul>
+      </aside>
+
+      <main class="dashboard-main">
+        <div class="form-card">
+          <h2>Share Your Feedback</h2>
+          <form id="feedbackForm">
+            <label>Rating (1-5)</label>
+            <select id="rating">
+              <option>5 - Excellent</option>
+              <option>4 - Good</option>
+              <option>3 - Average</option>
+              <option>2 - Poor</option>
+              <option>1 - Terrible</option>
+            </select>
+
+            <label>Message</label>
+            <textarea
+              rows="4"
+              id="feedbackMsg"
+              placeholder="Tell us about your experience..."
+            ></textarea>
+
+            <button type="submit" class="btn-primary">Submit Feedback</button>
+          </form>
+          <h3>Recent Feedback</h3>
+          <div id="feedbackList"></div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script>
+      function loadFeedback() {
+        const feedbacks = JSON.parse(localStorage.getItem("feedbacks") || "[]");
+        const container = document.getElementById("feedbackList");
+        container.innerHTML = feedbacks
+          .slice(-5)
+          .reverse()
+          .map(
+            (f) =>
+              `<div class="feedback-item"><strong>⭐ ${f.rating}</strong><p>${f.message}</p><small>${f.date}</small></div>`,
+          )
+          .join("");
+      }
+      document
+        .getElementById("feedbackForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const rating = document.getElementById("rating").value;
+          const message = document.getElementById("feedbackMsg").value;
+          if (!message) return alert("Please enter a message");
+          const feedbacks = JSON.parse(
+            localStorage.getItem("feedbacks") || "[]",
+          );
+          feedbacks.push({
+            rating,
+            message,
+            date: new Date().toLocaleString(),
+          });
+          localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
+          alert("Thank you for your feedback!");
+          document.getElementById("feedbackMsg").value = "";
+          loadFeedback();
+        });
+      loadFeedback();
+      attachLogout();
+    </script>
+  </body>
+</html>

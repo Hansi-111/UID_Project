@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buyer Dashboard | Student Essentials</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/dashboard-shop.css" />
+  </head>
+  <body>
+    <div class="dashboard-wrapper">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h3>Buyer Panel</h3>
+        <ul>
+          <li><a href="dashboard.html">📊 Dashboard (Shop)</a></li>
+          <li><a href="profile.html">👤 Profile</a></li>
+          <li><a href="cart.html">🛒 Cart</a></li>
+          <li><a href="billing.html">💳 Billing</a></li>
+          <li><a href="feedback.html">⭐ Feedback</a></li>
+          <li><a href="query.html">❓ Query</a></li>
+          <li><a href="#" id="logoutBtn">🚪 Logout</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="dashboard-main">
+        <div class="top-bar">
+          <h2>Shopping Dashboard</h2>
+          <span id="userGreeting"></span>
+        </div>
+
+        <!-- Mini Cart Summary -->
+        <div class="cart-summary-card">
+          <span
+            >🛒 Cart items: <strong id="cartItemCount">0</strong> | Total:
+            ₹<strong id="cartTotalPreview">0</strong></span
+          >
+          <a href="cart.html">View Cart & Checkout</a>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-section">
+          <div class="filter-group">
+            <label>Category:</label>
+            <select id="categoryFilter">
+              <option value="all">All</option>
+              <option value="stationery">Stationery</option>
+              <option value="gadgets">Gadgets</option>
+              <option value="accessories">Accessories</option>
+              <option value="study">Study Materials</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Price Range:</label>
+            <select id="priceFilter">
+              <option value="all">All</option>
+              <option value="0-100">₹0 - ₹100</option>
+              <option value="100-500">₹100 - ₹500</option>
+              <option value="500-1000">₹500 - ₹1000</option>
+              <option value="1000+">₹1000+</option>
+            </select>
+          </div>
+          <button id="applyFilters" class="btn-secondary">Apply</button>
+          <button id="resetFilters" class="btn-secondary">Reset</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="dashboard-products">
+          <h3>All Products</h3>
+          <div id="dashboardProductGrid" class="product-grid"></div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/dashboard.js"></script>
+  </body>
+</html>

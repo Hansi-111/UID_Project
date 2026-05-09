@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Product | Seller</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="dashboard-wrapper">
+      <aside class="sidebar">... same seller sidebar ...</aside>
+      <main class="dashboard-main">
+        <div class="form-card">
+          <h2>Add New Product</h2>
+          <form id="addProductForm">
+            <label>Product Name</label>
+            <input type="text" id="prodName" required />
+            <label>Category</label>
+            <select id="prodCategory">
+              <option>stationery</option>
+              <option>gadgets</option>
+              <option>accessories</option>
+              <option>study</option>
+            </select>
+            <label>Price (₹)</label>
+            <input type="number" id="prodPrice" required />
+            <label>Stock Quantity</label>
+            <input type="number" id="prodStock" required />
+            <label>Description</label>
+            <textarea id="prodDesc" rows="2"></textarea>
+            <label>Image URL (placeholder)</label>
+            <input
+              type="text"
+              id="prodImage"
+              value="https://via.placeholder.com/150"
+            />
+            <button type="submit" class="btn-primary">Add Product</button>
+          </form>
+        </div>
+      </main>
+    </div>
+    <script src="../js/seller-add-item.js"></script>
+  </body>
+</html>
