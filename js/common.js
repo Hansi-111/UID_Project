@@ -66,8 +66,16 @@ const sampleProducts = [
 
 // Load products from localStorage or use sample
 let products = JSON.parse(localStorage.getItem("products")) || sampleProducts;
+
+// ========== CUSTOM EVENT FOR PRODUCT CHANGES ==========
+function notifyProductsChanged() {
+  window.dispatchEvent(new Event('products-changed'));
+}
+
+// Modify saveProducts() to dispatch the event
 function saveProducts() {
-  localStorage.setItem("products", JSON.stringify(products));
+  localStorage.setItem('products', JSON.stringify(products));
+  notifyProductsChanged(); 
 }
 
 // ---------- USER MANAGEMENT ----------
@@ -350,3 +358,25 @@ function attachLogout() {
     }
   });
 }
+
+// ------------------------------------------------------------
+// INITIALIZE LOCALSTORAGE WITH SAMPLE PRODUCTS IF EMPTY
+// ------------------------------------------------------------
+if (!localStorage.getItem('products') || JSON.parse(localStorage.getItem('products')).length === 0) {
+  console.log('Initializing sample products into localStorage...');
+  saveProducts();  // this will store the current `products` array (which currently holds sampleProducts)
+}
+
+// ========== INITIALIZE SAMPLE DATA ==========
+(function initData() {
+  if (!localStorage.getItem('products')) {
+    console.log('No products found in localStorage. Saving sample products...');
+    saveProducts();
+  } else {
+    const existing = JSON.parse(localStorage.getItem('products'));
+    if (existing.length === 0) {
+      console.log('Products array empty. Re-initializing with samples...');
+      saveProducts();
+    }
+  }
+})();

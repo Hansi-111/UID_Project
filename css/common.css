@@ -82,6 +82,9 @@ a:hover {
   font-size: 1.5rem;
   font-weight: bold;
   color: #c07a53;
+  display: flex;
+  align-items: center;
+  gap:10px;
 }
 
 .search-bar input {

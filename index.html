@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Student Essentials Store | Home</title>
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/home.css" />
@@ -11,7 +14,10 @@
     <!-- Top Navbar -->
     <nav class="navbar">
       <div class="nav-container">
-        <a href="index.html" class="logo">📚 StudentEssentials</a>
+        <a href="index.html" class="logo">
+          <img src="assets/stationary.png" width="40" height="40" alt="Logo" />
+          <span>DeskAura</span>
+        </a>
         <div class="search-bar">
           <input
             type="text"
@@ -64,7 +70,6 @@
 
     <script src="js/common.js"></script>
     <script>
-      // Load products on home page
       document.addEventListener("DOMContentLoaded", () => {
         renderProductGrid("all");
         updateCartCountDisplay();
