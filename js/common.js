@@ -9,7 +9,7 @@ const sampleProducts = [
     price: 99,
     stock: 50,
     description: "200 pages, hardcover",
-    image: "https://via.placeholder.com/150?text=Notebook",
+    image: "https://picsum.photos/id/20/300/200",
     seller: "seller@example.com",
   },
   {
@@ -19,7 +19,7 @@ const sampleProducts = [
     price: 499,
     stock: 20,
     description: "Ergonomic, 2.4GHz",
-    image: "https://via.placeholder.com/150?text=Mouse",
+    image: "https://picsum.photos/id/26/300/200",
     seller: "seller@example.com",
   },
   {
@@ -29,7 +29,7 @@ const sampleProducts = [
     price: 799,
     stock: 15,
     description: "Aluminum foldable",
-    image: "https://via.placeholder.com/150?text=Stand",
+    image: "https://picsum.photos/id/0/300/200",
     seller: "seller@example.com",
   },
   {
@@ -39,7 +39,7 @@ const sampleProducts = [
     price: 450,
     stock: 10,
     description: "For engineering students",
-    image: "https://via.placeholder.com/150?text=Calculus",
+    image: "https://picsum.photos/id/24/300/200",
     seller: "seller@example.com",
   },
   {
@@ -49,7 +49,7 @@ const sampleProducts = [
     price: 49,
     stock: 100,
     description: "Smooth writing",
-    image: "https://via.placeholder.com/150?text=Pens",
+    image: "https://picsum.photos/id/21/300/200",
     seller: "seller@example.com",
   },
   {
@@ -59,23 +59,22 @@ const sampleProducts = [
     price: 1299,
     stock: 8,
     description: "7-in-1 adapter",
-    image: "https://via.placeholder.com/150?text=USBHub",
+    image: "https://picsum.photos/id/77/300/200",
     seller: "seller@example.com",
   },
-];
-
+]; 
 // Load products from localStorage or use sample
 let products = JSON.parse(localStorage.getItem("products")) || sampleProducts;
 
 // ========== CUSTOM EVENT FOR PRODUCT CHANGES ==========
 function notifyProductsChanged() {
-  window.dispatchEvent(new Event('products-changed'));
+  window.dispatchEvent(new Event("products-changed"));
 }
 
 // Modify saveProducts() to dispatch the event
 function saveProducts() {
-  localStorage.setItem('products', JSON.stringify(products));
-  notifyProductsChanged(); 
+  localStorage.setItem("products", JSON.stringify(products));
+  notifyProductsChanged();
 }
 
 // ---------- USER MANAGEMENT ----------
@@ -141,20 +140,20 @@ function addToCart(productId, quantity = 1) {
   // Check if user is logged in
   const currentUser = getCurrentUser();
   if (!currentUser) {
-    alert('Please login to add items to cart');
-    window.location.href = 'pages/login.html';
+    alert("Please login to add items to cart");
+    window.location.href = "pages/login.html";
     return false;
   }
-  
-  const product = products.find(p => p.id == productId);
+
+  const product = products.find((p) => p.id == productId);
   if (!product) return false;
-  const existing = cart.find(item => item.id == productId);
+  const existing = cart.find((item) => item.id == productId);
   if (existing) {
     existing.quantity += quantity;
   } else {
     cart.push({ ...product, quantity });
   }
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCountDisplay();
   return true;
 }
@@ -362,20 +361,23 @@ function attachLogout() {
 // ------------------------------------------------------------
 // INITIALIZE LOCALSTORAGE WITH SAMPLE PRODUCTS IF EMPTY
 // ------------------------------------------------------------
-if (!localStorage.getItem('products') || JSON.parse(localStorage.getItem('products')).length === 0) {
-  console.log('Initializing sample products into localStorage...');
-  saveProducts();  // this will store the current `products` array (which currently holds sampleProducts)
+if (
+  !localStorage.getItem("products") ||
+  JSON.parse(localStorage.getItem("products")).length === 0
+) {
+  console.log("Initializing sample products into localStorage...");
+  saveProducts(); // this will store the current `products` array (which currently holds sampleProducts)
 }
 
 // ========== INITIALIZE SAMPLE DATA ==========
 (function initData() {
-  if (!localStorage.getItem('products')) {
-    console.log('No products found in localStorage. Saving sample products...');
+  if (!localStorage.getItem("products")) {
+    console.log("No products found in localStorage. Saving sample products...");
     saveProducts();
   } else {
-    const existing = JSON.parse(localStorage.getItem('products'));
+    const existing = JSON.parse(localStorage.getItem("products"));
     if (existing.length === 0) {
-      console.log('Products array empty. Re-initializing with samples...');
+      console.log("Products array empty. Re-initializing with samples...");
       saveProducts();
     }
   }

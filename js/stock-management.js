@@ -79,3 +79,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   renderStockTable();
 });
+
+function renderStockTable() {
+  const currentUser = getCurrentUser();
+  if (!currentUser || currentUser.role !== "seller") return;
+
+  const allProducts = JSON.parse(localStorage.getItem("products")) || [];
+  // Filter products by seller email
+  const sellerProducts = allProducts.filter(
+    (p) => p.seller === currentUser.email,
+  );
+
+  // ... rest of rendering using sellerProducts instead of allProducts
+}

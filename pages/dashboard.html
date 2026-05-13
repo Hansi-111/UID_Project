@@ -29,7 +29,13 @@
               <span>Shop</span></a
             >
           </li>
-          <li><a href="profile.html"> Profile</a></li>
+          <li>
+            <a href="profile.html"
+              ><img src="../assets/user.png" width="30" height="30" /><span>
+                Profile</span
+              ></a
+            >
+          </li>
           <li>
             <a href="cart.html"
               ><img
@@ -39,10 +45,32 @@
               /><span>Cart</span></a
             >
           </li>
-          <li><a href="billing.html"> Billing</a></li>
-          <li><a href="feedback.html"> Feedback</a></li>
-          <li><a href="query.html">Query</a></li>
-          <li><a href="#" id="logoutBtn"> Logout</a></li>
+          <li>
+            <a href="billing.html"
+              ><img src="../assets/bill.png" width="30" height="30" /><span>
+                Billing</span
+              ></a
+            >
+          </li>
+          <li>
+            <a href="feedback.html">
+              <img src="../assets/review.png" width="30" height="30" />
+              <span>Feedback</span></a
+            >
+          </li>
+          <li>
+            <a href="query.html">
+              <img src="../assets/question.png" width="30" height="30" /><span
+                >Query</span
+              ></a
+            >
+          </li>
+          <li>
+            <a href="#" id="logoutBtn"
+              ><img src="../assets/logout.png" width="30" height="30" />
+              <span>Logout</span></a
+            >
+          </li>
         </ul>
       </aside>
 
@@ -187,7 +215,14 @@
                 ) : (
                   filteredProducts.map((product) => (
                     <div key={product.id} className="product-card">
-                      <img src={product.image} alt={product.name} />
+                     
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        onError={(e) => {
+                          e.target.src = "https://picsum.photos/id/1/300/200";
+                        }}
+                      />
                       <div className="product-info">
                         <div className="product-title">{product.name}</div>
                         <div className="product-price">₹{product.price}</div>
