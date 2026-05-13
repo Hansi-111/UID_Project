@@ -1,4 +1,4 @@
-/* Dashboard Layout (shared for user dashboard and sidebar) */
+  /* Dashboard Layout (shared for user dashboard and sidebar) */
 .dashboard-wrapper {
   display: flex;
   min-height: 100vh;
@@ -53,6 +53,16 @@
 .sidebar a:hover {
   background: #c8b39a;
   color: white;
+}
+
+.sidebar a.active {
+  background: #c07a53;
+  color: white;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.sidebar a.active:hover {
+  background: #b56743;
 }
 
 /* Main Dashboard Content */

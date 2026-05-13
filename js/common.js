@@ -358,6 +358,20 @@ function attachLogout() {
   });
 }
 
+function highlightSidebarActiveLink() {
+  const currentPage = window.location.pathname.split("/").pop();
+  document.querySelectorAll(".sidebar a[href]").forEach((link) => {
+    const linkPage = link.getAttribute("href").split("/").pop();
+    if (linkPage && linkPage === currentPage) {
+      link.classList.add("active");
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  highlightSidebarActiveLink();
+});
+
 // ------------------------------------------------------------
 // INITIALIZE LOCALSTORAGE WITH SAMPLE PRODUCTS IF EMPTY
 // ------------------------------------------------------------
