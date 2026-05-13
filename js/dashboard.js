@@ -101,28 +101,49 @@ function updateCartPreview() {
   if (totalElem) totalElem.innerText = total;
 }
 
-function setupDashboardFilters() {
-  const applyBtn = document.getElementById("applyFilters");
-  const resetBtn = document.getElementById("resetFilters");
-  const categorySelect = document.getElementById("categoryFilter");
-  const priceSelect = document.getElementById("priceFilter");
-
-  if (applyBtn) {
-    applyBtn.addEventListener("click", () => {
-      currentFilterCategory = categorySelect.value;
-      currentPriceRange = priceSelect.value;
-      renderDashboardProducts();
-    });
-  }
-  if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
-      categorySelect.value = "all";
-      priceSelect.value = "all";
-      currentFilterCategory = "all";
-      currentPriceRange = "all";
-      renderDashboardProducts();
-    });
-  }
+function setupDashboardSearch() {
+  const searchInput = document.getElementById("searchInput");
+  const searchBtn = document.getElementById("searchBtn");
+  if (!searchInput || !searchBtn) return;
+  const performSearch = () => {
+    const term = searchInput.value.toLowerCase();
+    const allProducts = products;
+    const filtered = allProducts.filter(
+      (p) =>
+        p.name.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term),
+    );
+    const grid = document.getElementById("dashboardProductGrid");
+    if (grid) {
+      grid.innerHTML = filtered
+        .map(
+          (product) => `
+        <div class="product-card">
+          <img src="${product.image}" alt="${product.name}">
+          <div class="product-info">
+            <div class="product-title">${product.name}</div>
+            <div class="product-price">₹${product.price}</div>
+            <div class="product-desc">${product.description}</div>
+            <button class="add-to-cart-dash" data-id="${product.id}">Add to Cart</button>
+          </div>
+        </div>
+      `,
+        )
+        .join("");
+      document.querySelectorAll(".add-to-cart-dash").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const id = parseInt(btn.dataset.id);
+          addToCart(id, 1);
+          updateCartPreview();
+          alert("Added to cart!");
+        });
+      });
+    }
+  };
+  searchBtn.addEventListener("click", performSearch);
+  searchInput.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") performSearch();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -138,5 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderDashboardProducts();
   renderMyOrders(); // <-- render orders
   setupDashboardFilters();
+  setupDashboardSearch();
   attachLogout();
 });

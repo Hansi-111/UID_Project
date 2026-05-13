@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Feedback | Student Essentials</title>
     <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
     <link rel="stylesheet" href="../css/feedback.css" />
   </head>
   <body>
@@ -67,29 +68,31 @@
       </aside>
 
       <main class="dashboard-main">
-        <div class="form-card">
-          <h2>Share Your Feedback</h2>
-          <form id="feedbackForm">
-            <label>Rating (1-5)</label>
-            <select id="rating">
-              <option>5 - Excellent</option>
-              <option>4 - Good</option>
-              <option>3 - Average</option>
-              <option>2 - Poor</option>
-              <option>1 - Terrible</option>
-            </select>
+        <div class="form-container">
+          <div class="form-card">
+            <h2>Share Your Feedback</h2>
+            <form id="feedbackForm">
+              <label>Rating (1-5)</label>
+              <select id="rating">
+                <option>5 - Excellent</option>
+                <option>4 - Good</option>
+                <option>3 - Average</option>
+                <option>2 - Poor</option>
+                <option>1 - Terrible</option>
+              </select>
 
-            <label>Message</label>
-            <textarea
-              rows="4"
-              id="feedbackMsg"
-              placeholder="Tell us about your experience..."
-            ></textarea>
+              <label>Message</label>
+              <textarea
+                rows="4"
+                id="feedbackMsg"
+                placeholder="Tell us about your experience..."
+              ></textarea>
 
-            <button type="submit" class="btn-primary">Submit Feedback</button>
-          </form>
-          <h3>Recent Feedback</h3>
-          <div id="feedbackList"></div>
+                <button type="submit" class="btn-primary">Submit Feedback</button>
+            </form>
+            <h3>Recent Feedback</h3>
+            <div id="feedbackList"></div>
+          </div>
         </div>
       </main>
     </div>
@@ -130,6 +133,7 @@
         });
       loadFeedback();
       attachLogout();
+      document.querySelector('a[href="feedback.html"]').classList.add("active");
     </script>
   </body>
 </html>

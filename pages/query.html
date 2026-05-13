@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Raise a Query | Student Essentials</title>
     <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
     <link rel="stylesheet" href="../css/query.css" />
   </head>
   <body>
@@ -66,16 +67,18 @@
         </ul>
       </aside>
       <main class="dashboard-main">
-        <div class="form-card">
-          <h2>Raise a Support Query</h2>
-          <form id="queryForm">
-            <label>Subject</label>
-            <input type="text" id="querySubject" required />
-            <label>Message</label>
-            <textarea rows="4" id="queryMsg" required></textarea>
-            <button type="submit" class="btn-primary">Submit Query</button>
-          </form>
-          <div id="queryHistory"></div>
+        <div class="form-container">
+          <div class="form-card">
+            <h2>Raise a Support Query</h2>
+            <form id="queryForm">
+              <label>Subject</label>
+              <input type="text" id="querySubject" required />
+              <label>Message</label>
+              <textarea rows="4" id="queryMsg" required></textarea>
+              <button type="submit" class="btn-primary">Submit Query</button>
+            </form>
+            <div id="queryHistory"></div>
+          </div>
         </div>
       </main>
     </div>
@@ -126,6 +129,7 @@
       });
       loadQueries();
       attachLogout();
+      document.querySelector('a[href="query.html"]').classList.add("active");
     </script>
   </body>
 </html>
