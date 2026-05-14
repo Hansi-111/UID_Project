@@ -240,12 +240,13 @@
                         <div className="product-desc">
                           {product.description}
                         </div>
-                        <button
+                        <button 
                           className="add-to-cart-dash"
                           onClick={() => handleAddToCart(product)}
                           disabled={product.stock === 0}
                           style={{
                             opacity: product.stock === 0 ? 0.5 : 1,
+                            
                             cursor:
                               product.stock === 0 ? "not-allowed" : "pointer",
                           }}
